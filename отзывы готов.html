@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы | PortfolioPRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Используем стили из основного сайта */
+        :root {
+            --dark-blue: #00202e;
+            --deep-blue: #03071e;
+            --dark-brown: #211c1b;
+            --brown-1: #3d3019;
+            --brown-2: #594417;
+            --brown-3: #745814;
+            --brown-4: #906b12;
+            --brown-5: #ac7f0f;
+            --accent: #ffba08;
+            --text: #fbf2c4;
+            --text-light: rgba(251, 242, 196, 0.7);
+            --grid-gap: 30px;
+            --container-width: 1400px;
+            --border-radius: 12px;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fAZ9hiA.woff2) format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYAZ9hiA.woff2) format('woff2');
+        }
+
+        body {
+            background-color: var(--dark-blue);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            font-weight: 400;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 32, 46, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(33, 28, 27, 0.6) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            background: rgba(2, 32, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 186, 8, 0.1);
+            transition: var(--transition);
+        }
+
+        .header-scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .logo {
+            color: var(--text);
+            font-size: 1.8rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            color: var(--accent);
+        }
+
+        .logo-icon {
+            color: var(--accent);
+            font-size: 1.4em;
+            transition: var(--transition);
+        }
+
+        /* Main content */
+        main {
+            padding: 140px 0 80px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Reviews section */
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            position: relative;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            margin: 20px auto 0;
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .rating-overview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            background: linear-gradient(145deg, var(--deep-blue), var(--dark-blue));
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 186, 8, 0.1);
+        }
+
+        .average-rating {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stars {
+            display: flex;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .stars i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .total-reviews {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .rating-bars {
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .rating-label {
+            width: 80px;
+            font-size: 0.9rem;
+        }
+
+        .bar-container {
+            flex-grow: 1;
+            height: 10px;
+            background: rgba(255, 186, 8, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--grid-gap);
+            margin-bottom: 60px;
+        }
+
+        .review-card {
+            background: linear-gradient(145deg, var(--deep-blue), var(--dark-blue));
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 186, 8, 0.1);
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 186, 8, 0.3);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .review-author {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .review-date {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+
+        .review-rating {
+            color: var(--accent);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .review-plan {
+            display: inline-block;
+            background: rgba(255, 186, 8, 0.1);
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 186, 8, 0.2);
+        }
+
+        .review-text {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .review-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .review-image {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 186, 8, 0.2);
+        }
+
+        .review-image:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+        }
+
+        .leave-review {
+            text-align: center;
+            margin-top: 60px;
+            padding: 60px 0;
+            background: linear-gradient(135deg, var(--brown-3), var(--brown-5));
+            border-radius: var(--border-radius);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(117, 88, 20, 0.4);
+        }
+
+        .leave-review::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: rotate 20s linear infinite;
+            z-index: 0;
+        }
+
+        .leave-review-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .leave-review h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .leave-review p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: rgba(251, 242, 196, 0.9);
+            line-height: 1.6;
+        }
+
+        .review-btn {
+            background: var(--text);
+            color: var(--brown-3);
+            padding: 16px 40px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+
+        .review-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Back button */
+        .back-btn {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid rgba(255, 186, 8, 0.3);
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 186, 8, 0.1);
+            transform: translateY(-3px);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .back-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 186, 8, 0.4);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
+        }
+
+        .back-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-brown);
+            color: var(--text);
+            padding: 60px 0 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .footer-content {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .footer-logo i {
+            color: var(--accent);
+            font-size: 1.3em;
+        }
+
+        .footer-contacts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-contacts p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        .footer-contacts a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-contacts a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: rgba(251, 242, 196, 0.5);
+            margin-top: 30px;
+        }
+
+        /* Animations */
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .leave-review h2 {
+                font-size: 1.8rem;
+            }
+            
+            .leave-review p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .header-container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .section-title::after {
+                width: 60px;
+                margin: 15px auto 0;
+            }
+            
+            .section-subtitle {
+                font-size: 1rem;
+            }
+            
+            .rating-overview {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+            
+            .average-rating {
+                font-size: 3rem;
+            }
+            
+            .rating-bars {
+                width: 100%;
+            }
+            
+            .review-card {
+                padding: 25px;
+            }
+            
+            .leave-review {
+                padding: 40px 0;
+            }
+            
+            .leave-review h2 {
+                font-size: 1.6rem;
+            }
+            
+            .review-btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.8rem;
+            }
+            
+            .footer-contacts {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-contacts p {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .leave-review h2 {
+                font-size: 1.5rem;
+            }
+            
+            .footer-logo {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-palette logo-icon"></i>
+                PortfolioPRO
+            </a>
+            <a href="https://stabedad.github.io/prfoliopro/" class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left"></i> На главную
+            </a>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <section class="reviews">
+            <div class="container">
+                <div class="reviews-header">
+                    <h2 class="section-title">Отзывы наших клиентов</h2>
+                    <p class="section-subtitle">Реальные мнения людей, которые уже воспользовались нашими услугами</p>
+                </div>
+
+                <div class="rating-overview">
+                    <div class="rating-summary">
+                        <div class="average-rating">4.7</div>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="total-reviews">176 отзывов</div>
+                    </div>
+                    <div class="rating-bars">
+                        <div class="rating-bar">
+                            <div class="rating-label">5 звезд</div>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-label">4 звезды</div>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 18%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-label">3 звезды</div>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 5%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-label">2 звезды</div>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 1%;"></div>
+                            </div>
+                        </div>
+                        <div class="rating-bar">
+                            <div class="rating-label">1 звезда</div>
+                            <div class="bar-container">
+                                <div class="bar" style="width: 1%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reviews-grid" id="reviewsGrid">
+                    <!-- Reviews will be inserted here by JavaScript -->
+                </div>
+
+                <div class="leave-review">
+                    <div class="leave-review-content">
+                        <h2>Оставьте свой отзыв</h2>
+                        <p>После получения заказа вы сможете оставить отзыв через нашего Telegram-бота. Ваше мнение поможет нам стать лучше!</p>
+                        <p>Срок поддержки после завершения работы зависит от выбранного тарифа: Normal - 3 дня, PRO - 5 дней, PRO+ - 10 дней, Custom - 20 дней.</p>
+                        <a href="https://scratched-fuchsia-dive.glitch.me/send-message?username=Nno573&user_id=5037996819" class="review-btn">
+                            <i class="fas fa-paper-plane"></i> Отправить заявку
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-palette"></i> PortfolioPRO
+            </div>
+            <div class="footer-contacts">
+                <p><i class="fas fa-envelope"></i> Email: <a href="mailto:hello@portfolioai.com">hello@portfolioai.com</a></p>
+                <p><i class="fas fa-paper-plane"></i> Telegram: <a href="https://t.me/PortiStabeBot">@PortiStabeBot</a></p>
+                <p><i class="fas fa-clock"></i> Работаем: 24/7</p>
+            </div>
+            <p class="copyright">© 2024 PortfolioPRO. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Generate random dates between Jan 1, 2025 and May 12, 2025
+        function getRandomDate() {
+            const start = new Date(2025, 0, 1);
+            const end = new Date(2025, 4, 12);
+            const randomDate = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            
+            const options = { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' };
+            return randomDate.toLocaleDateString('ru-RU', options);
+        }
+
+     
+const allReviews = [
+    // PRO+ Reviews (50)
+    {
+        author: "Эльвира, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Заказала PRO+ портфолио получилось просто космическим. Особенно впечатлила интерактивная галерея - клиенты могут листать работы как книгу. За месяц количество заказов выросло в 2 раза. Поддержка отвечала моментально, все правки сделали быстро."
+    },
+    {
+        author: "Дмитрий, архитектор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "3D-туры по моим проектам просто взорвали мозг клиентам! За полгода доход вырос на 70%. Отдельное спасибо за подключение ТГ-бота - теперь заказы приходят прямо в телеграм, очень удобно."
+    },
+    {
+        author: "Елена, иллюстратор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с интерактивной галереей - это именно то, что нужно творческому человеку! Клиенты в шоке от анимаций при наведении на работы. Особенно понравилось, что можно было делать неограниченное количество правок - довели портфолио до совершенства."
+    },
+    {
+        author: "Павел, видеограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Видео-презентация на главной в PRO+ - это именно то, что нужно видеографу! Клиенты сразу видят качество работы."
+    },
+    {
+        author: "Татьяна, дизайнер интерьеров",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Все круто."
+    },
+    {
+        author: "Алексей, веб-разработчик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Количество заказов выросло в 4 раза. Особенно полезной оказалась приоритетная поддержка - все вопросы решались в течение часа."
+    },
+    {
+        author: "Михаил, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с интерактивной галереей - вау! Клиенты в восторге от эффектов при наведении. Заказов стало в 2 раза больше за месяц."
+    },
+    {
+        author: "Ангелина, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Неограниченные правки в PRO+ - это спасение! Довели портфолио до идеала. Поддержка работает быстро"
+    },
+    {
+        author: "Роман, инструктор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Люди с удовольствием работают со мной."
+    },
+    {
+        author: "Евгения, художник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Заказов стало в 3 раза больше. SEO работает отлично."
+    },
+    {
+        author: "Артур, 3D-дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Клиенты взаимодействуют с моими работами прямо на сайте. Количество заказов выросло."
+    },
+    {
+        author: "Виктория, fashion-фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с параллакс-эффектами и анимациями - это новый уровень! Клиенты в восторге от интерактивного просмотра. За месяц получила 5 коммерческих заказов."
+    },
+    {
+        author: "Егор, графический дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Неограниченные правки в PRO+ позволили создать идеальное портфолио. Поддержка 10 дней все вопросы решались мгновенно."
+    },
+    {
+        author: "Даяна, архитектор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "За 2 месяца получила 3 крупных заказа благодаря профессиональному внешнему виду."
+    },
+    {
+        author: "Денис, разработчик игр",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Рад что мог вносить много вправок, это помогло сделать сайт таким, каким я хотел его видеть."
+    },
+    {
+        author: "Ольга, дизайнер интерьеров",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Конверсия увеличилась в 4 раза."
+    },
+    {
+        author: "Иван, владелец вейпшопа",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Стильное портфолио помолго получить больше клиентов, заказов куча)."
+    },
+    {
+        author: "Екатерина, иллюстратор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с анимированным портфолио очень круто, мечта стала реальностью! Работы оживают при наведении."
+    },
+    {
+        author: "Максим, веб-дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с интерактивными кейсами - это мощный инструмент!"
+    },
+    {
+        author: "Антон, 3D-художник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Уже получил заказ от крупной студии, спасибо вам."
+    },
+    {
+        author: "Наталья, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Довели каждый элемент до совершенства. Поддержка 10 дней все правки сделали быстро."
+    },
+    {
+        author: "Ринат, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "За месяц - 7 новых заказов."
+    },
+    {
+        author: "Марина, дизайнер интерфейсов",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Клиенты видят мои работы прямо в портфолио. Получила 3 предложения о работе."
+    },
+    {
+        author: "Артем, архитектор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "За 3 месяца - 4 новых проекта, благодоря размещенным работам в моем портфолио."
+    },
+    {
+        author: "Елена, художник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Популярность и узноваемость моих картин выросли в 3 раза."
+    },
+    {
+        author: "Дмитрий, разработчик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Получил 2 клиента в первые дни. До этого мог ждать месяц)."
+    },
+    {
+        author: "Ольга, репетитор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Родители при виде моего портфолио, видят мою профессиональность."
+    },
+    {
+        author: "Сергей, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мои фотосесии сразу видно в моем портфолио, шапка круто помогает ориентироваться"
+    },
+    {
+        author: "Анна, иллюстратор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Получила заказ в первые дни от издательства, от которых ждала заказ пол года, я в шоке)."
+    },
+    {
+        author: "Тарас, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Клиенты в восторге от презентации. Заказов стало в 2 раза больше."
+    },
+    {
+        author: "Евгений, архитектор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Благодорю дизайнеров которые чувствуют стиль. Получил 2 новых заказа почти сразу."
+    },
+    {
+        author: "Юна, фитнес тренер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Благодоря портфолио меня стали узнавать. Заказов стало больше!"
+    },
+    {
+        author: "Алексей, репетиор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Портфолио помолго намного быстрее находить себе учеников."
+    },
+    {
+        author: "Мария, визажист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Люди видят мой опыт работы и професиональность, спасибо вам."
+    },
+    {
+        author: "Герман, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с интерактивной галереей - это искусство. Клиенты в восторге."
+    },
+    {
+        author: "Екатерина, няня",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Портфолио помогло получить больше заказов."
+    },
+    {
+        author: "Артем, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Клиенты в восторге. Заказов стало больше."
+    },
+    {
+        author: "Алина, кондитер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Работы с моими тортиками смотрятся очень вкусно."
+    },
+    {
+        author: "Денис, ветеринар",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Видно мой профессионализм и долгую работу с животными."
+    },
+    {
+        author: "Ольга, швея",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Благодоря портфолио смогла попасть в крупную компанию в которую долго хотела попасть."
+    },
+    {
+        author: "Рамзан, фитнес тренер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Попал в крупный спорт-зал тренером в ОАЭ."
+    },
+    {
+        author: "Анна, мастер маникюра",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Портфолио помогло набрать клиентов, видно мои работы"
+    },
+    {
+        author: "Михаил, плиточник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Заказов стало больше."
+    },
+    {
+        author: "Евгений, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Клиенты в восторге. Заказов больше."
+    },
+    {
+        author: "Марина, флорист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мои работы радают меня и моих клиентов."
+    },
+    {
+        author: "Никита, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мое портфолио выглядит профессионально, работы размещены очень круто. Заказов стало больше."
+    },
+    {
+        author: "Мария, кондитер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Портфолио замечательное!"
+    },
+    {
+        author: "Валентин, барбер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Благодоря портфолио смог устроиться в профессиональный салон."
+    },
+    {
+        author: "Динара, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мои лучшие фотографии со свадьбы размещены в портфолио просто огонь!!!"
+    },
+    {
+        author: "Артем, турагент",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мой малый бизнес стал расти в разы быстрее благодоря моему новому портфолио."
+    },
+    {
+        author: "Алина, психолог",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Портфолио в умеренных цветах, при виде его хочеться расслабиться."
+    },
+    {
+        author: "Денис, архитектор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "3 новых заказа."
+    },
+    {
+        author: "Ольга, копирайтер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ версия сработала на 100%! Заказов стало в 2 раза больше после обновления портфолио. Отдельное спасибо за SEO-оптимизацию - теперь меня находят по ключевым запросам. Анимации при скролле смотрятся очень современно."
+    },
+    {
+        author: "Сергей, организатор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ версия идеально подошла для моего портфолио. Особенно понравилась возможность встраивать интерактивные конкурсы прямо на страницу. Клиенты могут сразу оценить качество евентов. Поддержка за 5 дней помогла решить все вопросы."
+    },
+    {
+        author: "Мадина, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мои дизайнерские решения манят людей с новым портфолио)."
+    },
+    {
+        author: "Игорь, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ тариф превзошел ожидания! Галерея фотографий работает безупречно. Клиенты отмечают, что сайт грузится очень быстро, даже при большом количестве изображений. 5 дней поддержки хватило, чтобы настроить все как нужно."
+    },
+    {
+        author: "Екатерина, маркетолог",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с анимациями и интерактивными элементами - это то, что нужно для презентации кейсов! Клиенты могут в интерактивном режиме увидеть рост показателей после моей работы."
+    },
+    {
+        author: "Гордей, барбер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Портфолио помогло показать мои лучшие работы и набрать клиентов."
+    },
+    {
+        author: "Валерия, Репетитор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Теперь меня находят по ключевым запросам. Заказов стало больше. Анимации при скролле смотрятся круто."
+    },
+    {
+        author: "Глеб, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с ленивой загрузкой фото - идеально! Сайт быстрый даже с сотнями изображений. неграниченное количество вариантов дизайна - выбрал самый стильный."
+    },
+    {
+        author: "София, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Клиенты в шоке от презентации. Адаптация под мобильные безупречна. 10 дней поддержки хватило."
+    },
+    {
+        author: "Марк, турагент",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ Клиенты видят пейзажи, красиве виды прямо в моем портфолио. С новым портфолио организовывть туры стало гараздо удобнее и быстрее."
+    },
+    {
+        author: "Вера, стилист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "PRO+ с анимациями это волшебство! Клиенты в восторге от моего портфолио и от мох работ. Заказов стало в 2 раза больше за месяц."
+    },
+    {
+        author: "Дмитрий, перевозчик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Мое портфолио с информацией грузоперевозок помогло найти клиентов. ТГ бот помогает, приссылет уведомления при переходе по ссылке в портфолио."
+    },
+    {
+        author: "Ева, переводчик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO+",
+        text: "Подобрала идеальный стиль для моего порфолио. Анимации добавляют шарма. Смогла устроиться в международную компанию."
+    },
+    {
+        author: "Елисей, психолог",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Консултаций стало больше, благодоря новому портфолио."
+    },
+    {
+        author: "Ольга, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с SEO это находка! Теперь меня находят в поиске. Заказов стало больше. Анимации впечатляют клиентов."
+    },
+    {
+        author: "Иван, садовод",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Заказов стало больше, благодоря поддерже довел все до идеала."
+    },
+    {
+        author: "Алла, художник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Мои работы смотрятся по-новому. Получила заказ от галереи, от чего я в шоке!"
+    },
+    {
+        author: "Сергей, тренер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Новое портфолио говорит о моем профессионализме."
+    },
+    {
+        author: "Анна, кондитер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Мои дисерты с новым портфолио обрели новые краски."
+    },
+    {
+        author: "Дмитрий, разработчик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с размещением демо кодов помогло набрать клиентов, клиенты тестируют код. Получил предложение от компании."
+    },
+    {
+        author: "Божена, флорист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Портфолио стоит своих денег."
+    },
+    {
+        author: "Арсен, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Помогли красиво разместить все мои работы, я доволен."
+    },
+    {
+        author: "Ольга, еvent-организатор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "В портфолио указана вся нужная информация что упрощает работу."
+    },
+    {
+        author: "Сергей, автомеханник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "В портфолио смог указать опыт работы и все мои навыки с фотографиями, выглядит все четко."
+    },
+    {
+        author: "Вадим, архитектор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Клиенты изучают проекты. Быстро полуичл новые заказы."
+    },
+    {
+        author: "Дмитрий, коуч",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Благодоря портфолио люди могут подробно изучить мои курсы, что упрощает мою работу."
+    },
+    {
+        author: "Елена, фрилансер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Обновала у вас портфолио, будто обновила себя. Клиентов стало больше."
+    },
+    {
+        author: "Алексей, барбер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO стоил своих денег, из 5 стилей выбрал то что по душе!"
+    },
+    {
+        author: "Надежда, художник",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с анимацией это искусство, мои работы будто ожили."
+    },
+    {
+        author: "Олег, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с анимациями добавили свой шарм."
+    },
+    {
+        author: "Лилия, репетитор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Разместила портфорлио у себя в instagram, что помогло найти клиентов."
+    },
+    {
+        author: "Дмитрий, фитнес тренер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Благодарю поддержу за быстрые ответы."
+    },
+    {
+        author: "Раиса, флорист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Мои букеты радуют всех."
+    },
+    {
+        author: "Тамара, артист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Потрфолио очень красивое, видно мой огромный опыт работы."
+    },
+    {
+        author: "Ника, визажист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Все стоит своих денег."
+    },
+    {
+        author: "Оскар, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с анимациями дополнили портфолио! Все сделали быстро."
+    },
+    {
+        author: "Полина, стилист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Решила обновить портфолио и не пожалела. все сделали в сроки"
+    },
+    {
+        author: "Ян, водитель",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Все отлично, не ожидал такого результата."
+    },
+    {
+        author: "Елена, наня",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO тариф однозначно стоит своих денег. Поддержка моментальнаяю."
+    },
+    {
+        author: "Филипп, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с анимационной галереей выглядит сочно и дополняет мое портфолио."
+    },
+    {
+        author: "Алеся, мастер маникюра",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Работы впечатляют новых клиентов. Заказы заметно увеличелись."
+    },
+    {
+        author: "Сергей, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Заказов стало больше."
+    },
+    {
+        author: "Анна, SMM-менеджер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Портфолио подчеркнуло мой профессионализм."
+    },
+    {
+        author: "Дмитрий, садовод",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Класс."
+    },
+    {
+        author: "Любовь, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с анимациями это магия! Работы оживают."
+    },
+    {
+        author: "Илья, электрик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "В портфолио смог указать все мои навыки и мой профессионализм. Отправил портфолио в компанию и меня приняли."
+    },
+    {
+        author: "Карина, ветеренар",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Портфолио достойно своих денег."
+    },
+    {
+        author: "Мартин, массажист",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Я очень доволен своим портфолио."
+    },
+    {
+        author: "Анна, кондитер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Мои дисерты и портфолио идеальное сочитание."
+    },
+    {
+        author: "Георгий, разработчик",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Клиенты тестируют коды прямо в портфолио."
+    },
+    {
+        author: "Елена, волонтер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Портфолио стоит все свои 30$, спасибо вам."
+    },
+    {
+        author: "Алексей, оператор",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "PRO с галереей это круто!"
+    },
+    {
+        author: "Жанна, копирайтер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Нашла работу, портфолио супер."
+    },
+    {
+        author: "Сергей, дизайнер",
+        date: getRandomDate(),
+        rating: "★★★★★",
+        plan: "Тариф PRO",
+        text: "Портфолио с анимациями вау! Клиенты как и я в восторге."
+    },
+    {
+        author: "Максим, фотограф",
+        date: getRandomDate(),
+        rating: "★★★★☆",
+        plan: "Тариф Normal",
+        text: "Normal за $30 стал хорошим стартом для моего фотобизнеса. Выглядит профессионально, но есть ограничения по количеству блоков. Адаптация под мобильные базовая - на телефоне некоторые элементы съезжают. В целом за свои деньги - хороший вариант."
+    },
+    {
+        author: "Ирина, копирайтер",
+        date: getRandomDate(),
+        rating: "★★★★☆",
+        plan: "Тариф Normal",
+        text: "Normal тариф не плохо для старта. Простое, но стильное портфолио. Не хватило поддержки после завершения работы."
+    },
+    {
+        author: "Андрей, начинающий дизайнер",
+        date: getRandomDate(),
+        rating: "★★★☆☆",
+        plan: "Тариф Normal",
+        text: "За свои деньги нормально, но есть нюансы. Всего 3 варианта дизайна на выбор. Только 3 правки - мне не хватило, пришлось доплачивать. Мобильная версия работает. Для старта сойдет, но лучше рассмотреть PRO."
+    },
+    {
+        author: "Наталья, художник",
+        date: getRandomDate(),
+        rating: "★★★★☆",
+        plan: "Тариф Normal",
+        text: "Normal - хороший бюджетный вариант. Всего 5 блоков - для художника маловато."
+    },
+    {
+        author: "Виктор, Рразработчик",
+        date: getRandomDate(),
+        rating: "★★★☆☆",
+        plan: "Тариф Normal",
+        text: "Базовый функционал на уровне, но для технического портфолио маловато возможностей. Всего 3 правки - не хватило для тонкой настройки. Зато быстро и недорого."
+    },
+    {
+        author: "Светлана, кондитер",
+        date: getRandomDate(),
+        rating: "★★★★☆",
+        plan: "Тариф Normal",
+        text: "Normal подошел для демонстрации моих кондитерских работ. Просто, но стильно."
+    },
+    {
+        author: "Никита, фотограф",
+        date: getRandomDate(),
+        rating: "★★★☆☆",
+        plan: "Тариф Normal",
+        text: "Не хватает разместить все работы."
+    },
+    {
+        author: "Юлия, художник",
+        date: getRandomDate(),
+        rating: "★★★★☆",
+        plan: "Тариф Normal",
+        text: "Галерея приличная, но без изысков. 5 блоков маловато."
+    },
+    {
+        author: "Егор, фотограф",
+        date: getRandomDate(),
+        rating: "★★★☆☆",
+        plan: "Тариф Normal",
+        text: "Не хватает анимаций как в PRO. Всего 3 варианта дизайна, для старта сойдет."
+    },
+    {
+        author: "Олеся, кондитер",
+        date: getRandomDate(),
+        rating: "★★★★☆",
+        plan: "Тариф Normal",
+        text: "Тариф подошел для демонстрации работ. Просто, но стильно. Фото грузятся быстро, адаптация есть."
+    },
+            {
+                author: "Анна, дизайнер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "Заказала PRO+ и не пожалела ни на секунду! Портфолио получилось просто космическим. Особенно впечатлила интерактивная галерея клиенты могут листать работы как книгу. Поддержка отвечала моментально, все правки сделали быстро."
+            },
+            {
+                author: "Денис, архитектор",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "Отдельное спасибо за подключение ТГ-бота теперь заказы приходят прямо в телеграм, очень удобно."
+            },
+            {
+                author: "Елена, иллюстратор",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "PRO+ с интерактивной галереей - это именно то, что нужно творческому человеку! Особенно понравилось, что можно было делать неограниченное количество правок - довели портфолио до совершенства."
+            },
+            {
+                author: "Павел, видеограф",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "Видео-презентация на главном блоке в PRO+ это именно то, что нужно видеографу! Клиенты сразу видят качество работы."
+            },
+            {
+                author: "Татьяна, дизайнер интерьеров",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "Клиенты могут пройтись по квартирам через локальную ссылку сразу в портфолио. Это сильно повышает доверие и количество заказов."
+            },
+            {
+                author: "Вячеслав, веб-разработчик",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "PRO+ позволил создать портфолио с живыми демо всех моих проектов. Клиенты могут тестировать работу прямо на сайте. Особенно полезной оказалась приоритетная поддержка, все вопросы решались в течение часа."
+            },
+            {
+                author: "Гордей, барбер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "PRO+ с интерактивной галереей имба!"
+            },
+            {
+                author: "Ангелина, дизайнер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "Неограниченные правки в PRO+ - это спасение! Довели портфолио до идеала. Поддержка на 10 дней очень выручила."
+            },
+            {
+                author: "Роман, архитектор",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "ТГ-бот удобно присылает сообщения."
+            },
+            {
+                author: "Евгения, турагент",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO+",
+                text: "Людей приманивает мое портфолио, благодоря чему клиентоы стало больше."
+            },
+            {
+                author: "Диана, копирайтер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "PRO-версия сработала на 100%! Анимации при скролле смотрятся очень современно."
+            },
+            {
+                author: "Сергей, фитнес тренер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "PRO версия идеально подошла для моего технического портфолио. Клиенты могут сразу оценить качество моих тренировок. Поддержка за 5 дней помогла решить все вопросы."
+            },
+            {
+                author: "Лариса, графический дизайнер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "5 вариантов дизайна в PRO тарифе - это очень удобно! Выбрала самый необычный. Клиенты в восторге от презентации работ."
+            },
+            {
+                author: "Евгений, репетитор",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "PRO тариф превзошел ожидания. 5 дней поддержки хватило, чтобы настроить все как нужно."
+            },
+            {
+                author: "Екатерина, мастер миникюра",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "Все мои рабоы с ценами, отлично смотряться с стилем портфолио."
+            },
+            {
+                author: "Артем, 3D-художник",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "За месяц получил несколько заказов именно благодаря портфолио. Адаптация под мобильные работает отлично."
+            },
+            {
+                author: "Кира, копирайтер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "Анимации смотрятся круто."
+            },
+            {
+                author: "Глеб, тамада",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф PRO",
+                text: "ВСЕ СУПЕР. Портфолио смотрится интерестно, теперь у меня клиентов еще больше."
+            },
+            {
+                author: "Оксана, дизайнер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "Клиенты в шоке от презентации. Адаптация под мобильные безупречна. 5 дней поддержки хватило."
+            },
+            {
+                author: "Марк, 3D-художник",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф PRO",
+                text: "PRO с 3D-моделями - это круто! Клиенты крутят модели прямо на сайте. Получил несколько крупных заказов благодаря этой фиче."
+            },
+            {
+                author: "Максим, фотограф",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф Normal",
+                text: "Normal за $30 стал хорошим стартом для моего фотобизнеса. Выглядит профессионально, но есть ограничения по количеству блоков. Адаптация под мобильные базовая, на телефоне некоторые элементы съезжают. В целом за свои деньги, хороший вариант."
+            },
+            {
+                author: "Ирина, флорист",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф Normal",
+                text: "Простое, но стильное портфолио уже привлекло первых клиентов. Не хватило поддержки после завершения работы. Планирую апгрейд до PRO+ в ближайшее время."
+            },
+            {
+                author: "Андрей, начинающий дизайнер",
+                date: getRandomDate(),
+                rating: "★★★☆☆",
+                plan: "Тариф Normal",
+                text: "За свои деньги нормально, но есть нюансы. Всего 3 варианта дизайна на выбор. Только 3 правки - мне не хватило, лучше доплатить до PRO."
+            },
+            {
+                author: "Маргарита, турагент",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф Normal",
+                text: "Normal - хороший бюджетный вариант. Всего 5 блоков - для турагента маловато."
+            },
+            {
+                author: "Виктор, разработчик",
+                date: getRandomDate(),
+                rating: "★★★☆☆",
+                plan: "Тариф Normal",
+                text: "Базовый функционал на уровне, но для технического портфолио маловато возможностей. Нельзя встроить интерактивные демо проектов, как в PRO. Всего 3 правки не хватило для тонкой настройки. Зато быстро и недорого."
+            },
+            {
+                author: "Светлана, кондитер",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф Normal",
+                text: "Normal подошел моих кондитерских работ. Не хватило анимаций. Фотографии грузятся быстро, адаптация под телефон работает. В целом довольна за эти деньги."
+            },
+            {
+                author: "Назар, водитель грузовика",
+                date: getRandomDate(),
+                rating: "★★★☆☆",
+                plan: "Тариф Normal",
+                text: "Смог оформить портфолио с грузоперевозками. Быстро и недорого но лучше переплатить."
+            },
+            {
+                author: "Юлия, художник",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф Normal",
+                text: "Галерея приличная. 5 блоков маловато. В следующий раз возьму PRO+, что бы поместить все рработы."
+            },
+            {
+                author: "Иван, тамада",
+                date: getRandomDate(),
+                rating: "★★★☆☆",
+                plan: "Тариф Normal",
+                text: "Всего 3 варианта дизайна. Для старта сойдет."
+            },
+            {
+                author: "Олеся, кондитер",
+                date: getRandomDate(),
+                rating: "★★★★☆",
+                plan: "Тариф Normal",
+                text: "Тариф подошел для демонстрации работ. Фото грузятся быстро, адаптация есть."
+            },
+            {
+                author: "Александр, студия дизайна",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф Custom",
+                text: "Custom решение для нашей студии - это нечто! Многостраничное портфолио. 3 ТГ-бота для разных направлений работы. Поддержка 20 дней - все вопросы решались в приоритетном порядке. Стоило каждого рубля!"
+            },
+            {
+                author: "Марк, digital-агентство",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф Custom",
+                text: "Заказали Custom для всего агентства - портфолио на 15 страниц с личными кабинетами для каждого сотрудника. Интеграция с CRM, система бронирования консультаций, 3 ТГ-бота. Работали с нами 3 недели, результат превзошел все ожидания! Клиенты в шоке от уровня."
+            },
+            {
+                author: "Ольга, архитектурное бюро",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф Custom",
+                text: "Подключили 2 ТГ-бота для разных отделов. Поддержка 20 дней - исправляли даже наши поздние правки. Идеально!"
+            },
+            {
+                author: "Денис, IT-компания",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф Custom",
+                text: "Custom портфолио с живыми демо всех наших продуктов, мощно! Клиенты могут тестировать ПО прямо на сайте. Интеграция с Jira, 3 ТГ-бота для разных отделов. 20 дней поддержки хватило, чтобы настроить все идеально."
+            },
+            {
+                author: "Николай, рекламное агентство",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф Custom",
+                text: "Custom решение для нашего агентства - это шедевр! Интерактивные кейсы с возможностью поиграть с параметрами рекламных кампаний. Система бронирования консультаций. 3 ТГ-бота для разных услуг. В поддерже молоддцы"
+            },
+            {
+                author: "Алина, fashion-дизайнер",
+                date: getRandomDate(),
+                rating: "★★★★★",
+                plan: "Тариф Custom",
+                text: "Custom портфолио это просто космос! Виртуальный показ мод с возможностью покупки. 2 ТГ-бота для клиентов и партнеров. Поддержка 20 дней - довели все до совершенства!"
+            },
+        ];
+
+        // Shuffle reviews array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Display reviews
+        function displayReviews() {
+            const reviewsGrid = document.getElementById('reviewsGrid');
+            const shuffledReviews = shuffleArray(allReviews);
+            
+            shuffledReviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card animate-on-scroll';
+                reviewCard.innerHTML = `
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">${review.author}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
+                        <div class="review-rating">${review.rating}</div>
+                    </div>
+                    <span class="review-plan">${review.plan}</span>
+                    <p class="review-text">${review.text}</p>
+                `;
+                reviewsGrid.appendChild(reviewCard);
+            });
+        }
+
+        // Back button animation
+        document.getElementById('backBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.classList.add('clicked');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 500);
+        });
+
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            displayReviews();
+            
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            function animateOnScroll() {
+                reviewCards.forEach((card, index) => {
+                    const cardPosition = card.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (cardPosition < screenPosition) {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+            
+            // Set initial state
+            reviewCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.5s ease, transform 0.5s ease ${index * 0.1}s`;
+            });
+            
+            // Animate on load and scroll
+            animateOnScroll();
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
